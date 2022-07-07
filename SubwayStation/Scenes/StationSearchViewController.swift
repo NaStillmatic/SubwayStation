@@ -49,14 +49,16 @@ extension StationSearchViewController {
   }
   
   private func requsetStaionName(from stationName: String) {
-    let urlString = "http://openapi.seoul.go.kr:8088/sample/json/SearchInfoBySubwayNameService/1/5/\(stationName)"
-    AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
-      .responseDecodable(of: StationResoponseModel.self) { [weak self] response in
-        guard case .success(let data) = response.result else { return }
-        self?.stations =  data.stations
-        self?.tableView.reloadData()
-      }
-      .resume()
+    
+    guard !stationName.isEmpty else {
+      stations.removeAll()
+      return
+    }
+    
+    NetworkManager.shared.fetchSearchData(stationName: stationName) { [weak self] stations in
+      self?.stations = stations
+      self?.tableView.reloadData()
+    }
   }
 }
 
@@ -65,9 +67,9 @@ extension StationSearchViewController: UISearchBarDelegate {
   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     tableView.reloadData()
     tableView.isHidden = false
-  }
+  }    
   
-  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     tableView.isHidden = true
     stations.removeAll()
     tableView.reloadData()
@@ -100,7 +102,7 @@ extension StationSearchViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
   
     let station = stations[indexPath.row]
-    let vc = StationDetailViewController(station: station)
+    let vc = StationDetailViewController(stationName: station.stationName)
     navigationController?.pushViewController(vc, animated: true)
   }
 }

@@ -19,6 +19,7 @@
 		D8845D752876A64300A2565D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D8845D742876A64300A2565D /* Alamofire */; };
 		D8845D772876A9E000A2565D /* StationResopnseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8845D762876A9E000A2565D /* StationResopnseModel.swift */; };
 		D8845D7A2876AF9700A2565D /* StationArrivalDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8845D792876AF9700A2565D /* StationArrivalDataResponseModel.swift */; };
+		D8845D7D2876E4A600A2565D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8845D7C2876E4A600A2565D /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		D8845D7128769CD300A2565D /* StationDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8845D762876A9E000A2565D /* StationResopnseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResopnseModel.swift; sourceTree = "<group>"; };
 		D8845D792876AF9700A2565D /* StationArrivalDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalDataResponseModel.swift; sourceTree = "<group>"; };
+		D8845D7C2876E4A600A2565D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				D8845D5428752F6300A2565D /* AppDelegate.swift */,
 				D8845D5628752F6300A2565D /* SceneDelegate.swift */,
+				D8845D7B2876E48B00A2565D /* Network */,
 				D8845D782876AF7900A2565D /* Model */,
 				D8845D6E28769ABC00A2565D /* Scenes */,
 				D8845D5D28752F6500A2565D /* Assets.xcassets */,
@@ -96,6 +99,14 @@
 				D8845D792876AF9700A2565D /* StationArrivalDataResponseModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D8845D7B2876E48B00A2565D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D8845D7C2876E4A600A2565D /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 				D8845D5928752F6300A2565D /* StationSearchViewController.swift in Sources */,
 				D8845D5528752F6300A2565D /* AppDelegate.swift in Sources */,
 				D8845D7A2876AF9700A2565D /* StationArrivalDataResponseModel.swift in Sources */,
+				D8845D7D2876E4A600A2565D /* NetworkManager.swift in Sources */,
 				D8845D7228769CD300A2565D /* StationDetailCollectionViewCell.swift in Sources */,
 				D8845D5728752F6300A2565D /* SceneDelegate.swift in Sources */,
 				D8845D772876A9E000A2565D /* StationResopnseModel.swift in Sources */,

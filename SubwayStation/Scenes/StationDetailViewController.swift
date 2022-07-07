@@ -11,7 +11,7 @@ import Alamofire
 
 class StationDetailViewController: UIViewController {
   
-  private let station: Station
+  private let stationName: String
   private var realtimeArrivalList: [StationArrivalDataResponseModel.RealTimeArrival] = []
   
   private let cellIdentifier = "StationDetailCollectionViewCell"
@@ -38,8 +38,8 @@ class StationDetailViewController: UIViewController {
     return collectionView
   }()
   
-  init(station: Station) {
-    self.station = station
+  init(stationName: String) {
+    self.stationName = stationName
     super.init(nibName: nil, bundle: nil)
   }
       
@@ -50,7 +50,7 @@ class StationDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationItem.title = station.stationName
+    navigationItem.title = stationName
     
     view.addSubview(collectionView)
     
@@ -65,22 +65,13 @@ class StationDetailViewController: UIViewController {
 extension StationDetailViewController {
   
   @objc func fetchData() {
-    
-    var stationName = station.stationName
-    if stationName.hasSuffix("역") {
-      stationName.remove(at: stationName.index(before: stationName.endIndex))
-    }
-    let urlString = "http://swopenapi.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5/\(stationName)"
-    
-    AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
-      .responseDecodable(of: StationArrivalDataResponseModel.self) { [weak self] response in
-        self?.refreshControl.endRefreshing()
-        guard case .success(let data) = response.result else { return }
         
-        self?.realtimeArrivalList = data.realtimeArrivalList
-        self?.collectionView.reloadData()
-      }
-      .resume()
+    NetworkManager.shared.fetchArrivalData(stationName: stationName) { [weak self] realtimeArrivalList in
+      
+      self?.refreshControl.endRefreshing()
+      self?.realtimeArrivalList = realtimeArrivalList
+      self?.collectionView.reloadData()
+    }
   }
 }
 
