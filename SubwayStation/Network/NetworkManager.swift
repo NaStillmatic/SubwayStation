@@ -19,7 +19,7 @@ class NetworkManager {
     let urlString = "http://openapi.seoul.go.kr:8088/\(apiKey)/json/SearchInfoBySubwayNameService/1/5/\(stationName)"
     AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
       .responseDecodable(of: StationResoponseModel.self) { response in
-        guard case .success(let data) = response.result else { return }
+        guard case .success(let data) = response.result else { return completion([]) }
         completion(data.stations)
       }
       .resume()
@@ -35,7 +35,7 @@ class NetworkManager {
     
     AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
       .responseDecodable(of: StationArrivalDataResponseModel.self) { response in
-        guard case .success(let data) = response.result else { return completion([])}
+        guard case .success(let data) = response.result else { return completion([]) }
         completion(data.realtimeArrivalList)
       }
       .resume()
